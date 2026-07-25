@@ -1,0 +1,2029 @@
+Shape
+2D Primitives
+arc()
+Draws an arc.
+
+circle()
+Draws a circle.
+
+ellipse()
+Draws an ellipse (oval).
+
+line()
+Draws a straight line between two points.
+
+point()
+Draws a single point in space.
+
+quad()
+Draws a quadrilateral (four-sided shape).
+
+rect()
+Draws a rectangle.
+
+square()
+Draws a square.
+
+triangle()
+Draws a triangle.
+
+3D Models
+createModel()
+Load a 3d model from an OBJ or STL string.
+
+loadModel()
+Loads a 3D model to create a p5.Geometry object.
+
+model()
+Draws a p5.Geometry object to the canvas.
+
+3D Primitives
+box()
+Draws a box (rectangular prism).
+
+buildGeometry()
+Creates a custom p5.Geometry object from simpler 3D shapes.
+
+cone()
+Draws a cone.
+
+curveDetail()
+Sets the number of segments used to draw spline curves in WebGL mode.
+
+cylinder()
+Draws a cylinder.
+
+ellipsoid()
+Draws an ellipsoid.
+
+freeGeometry()
+Clears a p5.Geometry object from the graphics processing unit (GPU) memory.
+
+plane()
+Draws a plane.
+
+saveObj()
+The saveObj() function exports p5.Geometry objects as 3D models in the Wavefront .obj file format
+
+saveStl()
+The saveStl() function exports p5.Geometry objects as 3D models in the STL stereolithography file format
+
+sphere()
+Draws a sphere.
+
+strokeMode()
+Sets the stroke rendering mode to balance performance and visual features when drawing lines.
+
+torus()
+Draws a torus.
+
+Attributes
+ellipseMode()
+Changes where ellipses, circles, and arcs are drawn.
+
+noSmooth()
+Draws certain features with jagged (aliased) edges.
+
+rectMode()
+Changes where rectangles and squares are drawn.
+
+smooth()
+Draws certain features with smooth (antialiased) edges.
+
+strokeCap()
+Sets the style for rendering the ends of lines.
+
+strokeJoin()
+Sets the style of the joints that connect line segments.
+
+strokeWeight()
+Sets the width of the stroke used for points, lines, and the outlines of shapes.
+
+Curves
+bezier()
+Draws a Bézier curve.
+
+bezierPoint()
+Calculates coordinates along a Bézier curve using interpolation.
+
+bezierTangent()
+Calculates coordinates along a line that's tangent to a Bézier curve.
+
+spline()
+Draws a curve using a Catmull-Rom spline.
+
+splinePoint()
+Calculates coordinates along a spline curve using interpolation.
+
+splineTangent()
+Calculates coordinates along a line that's tangent to a spline curve.
+
+Custom Shapes
+beginContour()
+Begins creating a hole within a flat shape.
+
+beginShape()
+Begins adding vertices to a custom shape.
+
+bezierOrder()
+Influences the shape of the Bézier curve segment in a custom shape
+
+bezierVertex()
+Adds a Bézier curve segment to a custom shape.
+
+endContour()
+Stops creating a hole within a flat shape.
+
+endShape()
+Concludes the vertices of a custom shape.
+
+normal()
+Sets the normal vector for vertices in a custom 3D shape.
+
+splineProperties()
+Sets multiple properties for spline curves at once.
+
+splineProperty()
+Gets or sets a given spline property.
+
+splineVertex()
+Connects points with a smooth curve (a spline).
+
+vertex()
+Adds a vertex to a custom shape.
+
+vertexProperty()
+Sets the shader's vertex property or attribute variables.
+
+p5.Geometry
+calculateBoundingBox()
+Calculates the position and size of the smallest box that contains the geometry.
+
+clearColors()
+Removes the geometry’s internal colors.
+
+computeFaces()
+Computes the geometry's faces using its vertices.
+
+computeNormals()
+Calculates the normal vector for each vertex on the geometry.
+
+faces
+An array that lists which of the geometry's vertices form each of its faces.
+
+flipU()
+Flips the geometry’s texture u-coordinates.
+
+flipV()
+Flips the geometry’s texture v-coordinates.
+
+gid
+A unique identifier for this geometry
+
+makeEdgesFromFaces()
+normalize()
+Transforms the geometry's vertices to fit snugly within a 100×100×100 box centered at the origin.
+
+uvs
+An array that lists the texture coordinates for each of the geometry's vertices.
+
+vertexNormals
+An array with the vectors that are normal to the geometry's vertices.
+
+vertexProperty()
+Sets the shader's vertex property or attribute variables.
+
+vertices
+An array with the geometry's vertices.
+
+Color
+Creating & Reading
+alpha()
+Gets the alpha (transparency) value of a color.
+
+blue()
+Gets the blue value of a color.
+
+brightness()
+Gets the brightness value of a color.
+
+color()
+Creates a p5.Color object.
+
+green()
+Gets the green value of a color.
+
+hue()
+Gets the hue value of a color.
+
+lerpColor()
+Blends two colors to find a third color between them.
+
+lightness()
+Gets the lightness value of a color.
+
+paletteLerp()
+Blends multiple colors to find a color between them.
+
+red()
+Gets the red value of a color.
+
+saturation()
+Gets the saturation value of a color.
+
+Setting
+background()
+Sets the color used for the background of the canvas.
+
+beginClip()
+Starts defining a shape that will mask any shapes drawn afterward.
+
+blendMode()
+Sets the way colors blend when added to the canvas.
+
+clear()
+Clears the pixels on the canvas.
+
+clip()
+Defines a shape that will mask any shapes drawn afterward.
+
+colorMode()
+Changes the way color values are interpreted.
+
+endClip()
+Ends defining a mask that was started with beginClip().
+
+erase()
+Starts using shapes to erase parts of the canvas.
+
+fill()
+Sets the color used to fill shapes.
+
+noErase()
+Ends erasing that was started with erase().
+
+noFill()
+Disables setting the fill color for shapes.
+
+noStroke()
+Disables drawing points, lines, and the outlines of shapes.
+
+stroke()
+Sets the color used to draw points, lines, and the outlines of shapes.
+
+p5.Color
+contrast()
+Checks the contrast between two colors
+
+setAlpha()
+Sets the alpha (transparency) value of a color.
+
+setBlue()
+Sets the blue component of a color.
+
+setGreen()
+Sets the green component of a color.
+
+setRed()
+Sets the red component of a color.
+
+toString()
+Returns the color formatted as a String.
+
+Typography
+fontAscent()
+Returns the loose ascent of the text based on the font's intrinsic metrics.
+
+fontBounds()
+Computes a generic (non-tight) bounding box for a block of text.
+
+fontDescent()
+Returns the loose descent of the text based on the font's intrinsic metrics.
+
+fontWidth()
+Returns the loose width of a text string based on the current font.
+
+loadFont()
+Loads a font and creates a p5.Font object
+
+text()
+Draws text to the canvas.
+
+textAlign()
+Sets the way text is aligned when text() is called.
+
+textAscent()
+Returns the ascent of the text.
+
+textBounds()
+Computes the tight bounding box for a block of text.
+
+textDescent()
+Returns the descent of the text.
+
+textDirection()
+Sets or gets the text drawing direction.
+
+textFont()
+Sets the font used by the text() function.
+
+textLeading()
+Sets the spacing between lines of text when text() is called.
+
+textProperties()
+Gets or sets text properties in batch, similar to calling textProperty() multiple times.
+
+textProperty()
+Sets or gets a single text property for the renderer.
+
+textSize()
+Sets or gets the current text size.
+
+textStyle()
+Sets the style for system fonts when text() is called.
+
+textWeight()
+Sets or gets the current font weight.
+
+textWidth()
+Calculates the width of the given text string in pixels.
+
+textWrap()
+Sets the style for wrapping text when text() is called.
+
+p5.Font
+textToContours()
+Returns an array of arrays of points outlining a string of text written using the font
+
+textToModel()
+Converts text into a 3D model that can be rendered in WebGL mode.
+
+textToPaths()
+Returns a flat array of path commands that describe the outlines of a string of text.
+
+textToPoints()
+Returns an array of points outlining a string of text written using the font.
+
+Image
+createImage()
+Creates a new p5.Image object.
+
+saveCanvas()
+Saves the current canvas as an image.
+
+saveFrames()
+Captures a sequence of frames from the canvas that can be saved as images.
+
+Loading & Displaying
+image()
+Draws an image to the canvas.
+
+imageMode()
+Changes the location from which images are drawn when image() is called.
+
+loadImage()
+Loads an image to create a p5.Image object.
+
+noTint()
+Removes the current tint set by tint().
+
+saveGif()
+Generates a gif from a sketch and saves it to a file.
+
+tint()
+Tints images using a color.
+
+Pixels
+blend()
+Copies a region of pixels from one image to another.
+
+copy()
+Copies pixels from a source image to a region of the canvas.
+
+filter()
+Applies an image filter to the canvas.
+
+get()
+Gets a pixel or a region of pixels from the canvas.
+
+loadPixels()
+Loads the current value of each pixel on the canvas into the pixels array.
+
+pixels
+An array containing the color of each pixel on the canvas.
+
+set()
+Sets the color of a pixel or draws an image to the canvas.
+
+updatePixels()
+Updates the canvas with the RGBA values in the pixels array.
+
+p5.Image
+blend()
+Copies a region of pixels from another image into this one.
+
+copy()
+Copies pixels from a source image to this image.
+
+delay()
+Changes the delay between frames in an animated GIF.
+
+filter()
+Applies an image filter to the image.
+
+get()
+Gets a pixel or a region of pixels from the image.
+
+getCurrentFrame()
+Gets the index of the current frame in an animated GIF.
+
+height
+The image's height in pixels.
+
+loadPixels()
+Loads the current value of each pixel in the image into the img.pixels array.
+
+mask()
+Masks part of the image with another.
+
+numFrames()
+Returns the number of frames in an animated GIF.
+
+pause()
+Pauses an animated GIF.
+
+pixelDensity()
+Gets or sets the pixel density for high pixel density displays.
+
+pixels
+An array containing the color of each pixel in the image.
+
+play()
+Plays an animated GIF that was paused with img.pause().
+
+reset()
+Restarts an animated GIF at its first frame.
+
+resize()
+Resizes the image to a given width and height.
+
+save()
+Saves the image to a file.
+
+set()
+Sets the color of one or more pixels within an image.
+
+setFrame()
+Sets the current frame in an animated GIF.
+
+updatePixels()
+Updates the canvas with the RGBA values in the img.pixels array.
+
+width
+The image's width in pixels.
+
+Transform
+applyMatrix()
+Applies a transformation matrix to the coordinate system.
+
+pop()
+Ends a drawing group that contains its own styles and transformations.
+
+push()
+Begins a drawing group that contains its own styles and transformations.
+
+resetMatrix()
+Clears all transformations applied to the coordinate system.
+
+rotate()
+Rotates the coordinate system.
+
+rotateX()
+Rotates the coordinate system about the x-axis in WebGL mode.
+
+rotateY()
+Rotates the coordinate system about the y-axis in WebGL mode.
+
+rotateZ()
+Rotates the coordinate system about the z-axis in WebGL mode.
+
+scale()
+Scales the coordinate system.
+
+shearX()
+Shears the x-axis so that shapes appear skewed.
+
+shearY()
+Shears the y-axis so that shapes appear skewed.
+
+translate()
+Translates the coordinate system.
+
+Environment
+cursor()
+Changes the cursor's appearance.
+
+deltaTime
+A Number variable that tracks the number of milliseconds it took to draw the last frame.
+
+describe()
+Creates a screen reader-accessible description of the canvas.
+
+describeElement()
+Creates a screen reader-accessible description of elements in the canvas.
+
+displayDensity()
+Returns the display's current pixel density.
+
+displayHeight
+A Number variable that stores the height of the screen display.
+
+displayWidth
+A Number variable that stores the width of the screen display.
+
+focused
+A Boolean variable that's true if the browser is focused and false if not.
+
+frameCount
+A Number variable that tracks the number of frames drawn since the sketch started.
+
+frameRate()
+Sets the number of frames to draw per second.
+
+fullscreen()
+Toggles full-screen mode or returns the current mode.
+
+getTargetFrameRate()
+Returns the target frame rate.
+
+getURL()
+Returns the sketch's current URL as a String.
+
+getURLParams()
+Returns the current URL parameters in an Object.
+
+getURLPath()
+Returns the current URL path as an Array of Strings.
+
+gridOutput()
+Creates a screen reader-accessible description of shapes on the canvas.
+
+height
+A Number variable that stores the height of the canvas in pixels.
+
+noCursor()
+Hides the cursor from view.
+
+pixelDensity()
+Sets the pixel density or returns the current density.
+
+print()
+Displays text in the web browser's console.
+
+screenToWorld()
+Converts 2D screen coordinates to 3D world coordinates.
+
+textOutput()
+Creates a screen reader-accessible description of shapes on the canvas.
+
+webglVersion
+A String variable with the WebGL version in use.
+
+width
+A Number variable that stores the width of the canvas in pixels.
+
+windowHeight
+A Number variable that stores the height of the browser's viewport.
+
+windowResized()
+A function that's called when the browser window is resized.
+
+windowWidth
+A Number variable that stores the width of the browser's viewport.
+
+worldToScreen()
+Converts 3D world coordinates to 2D screen coordinates.
+
+3D
+Camera
+camera()
+Sets the position and orientation of the current camera in a 3D sketch.
+
+createCamera()
+Creates a new p5.Camera object.
+
+frustum()
+Sets the frustum of the current camera in a 3D sketch.
+
+linePerspective()
+Enables or disables perspective for lines in 3D sketches.
+
+ortho()
+Sets an orthographic projection for the current camera in a 3D sketch.
+
+perspective()
+Sets a perspective projection for the current camera in a 3D sketch.
+
+roll()
+Rotates the camera in a clockwise/counter-clockwise direction.
+
+setCamera()
+Sets the current (active) camera of a 3D sketch.
+
+Interaction
+debugMode()
+Adds a grid and an axes icon to clarify orientation in 3D sketches.
+
+noDebugMode()
+Turns off debugMode() in a 3D sketch.
+
+orbitControl()
+Allows the user to orbit around a 3D sketch using a mouse, trackpad, or touchscreen.
+
+Lights
+ambientLight()
+Creates a light that shines from all directions.
+
+directionalLight()
+Creates a light that shines in one direction.
+
+imageLight()
+Creates an ambient light from an image.
+
+lightFalloff()
+Sets the falloff rate for pointLight() and spotLight().
+
+lights()
+Places an ambient and directional light in the scene
+
+noLights()
+Removes all lights from the sketch.
+
+panorama()
+Creates an immersive 3D background.
+
+pointLight()
+Creates a light that shines from a point in all directions.
+
+specularColor()
+Sets the specular color for lights.
+
+spotLight()
+Creates a light that shines from a point in one direction.
+
+Material
+ambientMaterial()
+Sets the ambient color of shapes’ surface material.
+
+createFilterShader()
+Creates a p5.Shader object to be used with the filter() function using GLSL.
+
+createShader()
+Creates a new p5.Shader object using GLSL.
+
+emissiveMaterial()
+Sets the emissive color of shapes’ surface material.
+
+imageShader()
+Sets the p5.Shader object to apply for images.
+
+loadShader()
+Loads vertex and fragment shaders to create a p5.Shader object.
+
+metalness()
+Sets the amount of "metalness" of a specularMaterial().
+
+normalMaterial()
+Sets the current material as a normal material.
+
+resetShader()
+Restores the default shaders.
+
+shader()
+Sets the p5.Shader object to apply while drawing.
+
+shininess()
+Sets the amount of gloss ("shininess") of a specularMaterial().
+
+specularMaterial()
+Sets the specular color of shapes’ surface material.
+
+strokeShader()
+Sets the p5.Shader object to apply for strokes.
+
+texture()
+Sets the texture that will be used on shapes.
+
+textureMode()
+Changes the coordinate system used for textures when they’re applied to custom shapes.
+
+textureWrap()
+Changes the way textures behave when a shape’s uv coordinates go beyond the texture.
+
+p5.strands
+baseColorShader()
+Returns the default shader used for fills when no lights or textures are activate.
+
+baseComputeShader()
+Returns the default shader used for compute operations.
+
+baseFilterShader()
+Returns the base shader used for filters.
+
+baseMaterialShader()
+Returns the default shader used for fills when lights or textures are used.
+
+baseNormalShader()
+Returns the default shader used for fills when normalMaterial() is activated.
+
+baseStrokeShader()
+Returns the default shader used for strokes.
+
+buildColorShader()
+Create a new shader that can change how fills are drawn, based on the default shader used when no lights or textures are applied
+
+buildComputeShader()
+Create a new compute shader using p5.strands.
+
+buildFilterShader()
+Creates a p5.Shader object to be used with the filter() function.
+
+buildMaterialShader()
+Create a new shader that can change how fills are drawn
+
+buildNormalShader()
+Create a new shader that can change how fills are drawn, based on the material used when normalMaterial() is active
+
+buildStrokeShader()
+Create a new shader that can change how strokes are drawn, based on the default shader used for strokes
+
+cameraInputs
+A shader hook block that adjusts vertex properties from the perspective of the camera
+
+combineColors
+A shader hook block that modifies how color components are combined in the fragment shader
+
+compute()
+Dispatches a compute shader to run on the GPU.
+
+createStorage()
+Creates a p5.StorageBuffer, which is a block of data that shaders can read from, and compute shaders can also write to
+
+filterColor
+A shader hook block that sets the color for each pixel in a filter shader
+
+finalColor
+A shader hook block that modifies the final color of each pixel after all lighting is applied
+
+index
+Information about the current iteration of a compute shader.
+
+instanceID()
+A function alias for instanceIndex, kept for compatibility
+
+instanceIndex
+Returns the index of the current instance when drawing multiple copies of a shape with model(count)
+
+loadColorShader()
+Loads a new shader from a file that can change how fills are drawn, based on the material used when no lights or textures are active
+
+loadFilterShader()
+Loads a new shader from a file that can be applied to the contents of the canvas with filter()
+
+loadMaterialShader()
+Loads a new shader from a file that can change how fills are drawn
+
+loadNormalShader()
+Loads a new shader from a file that can change how fills are drawn, based on the material used when normalMaterial() is active
+
+loadStrokeShader()
+Loads a new shader from a file that can change how strokes are drawn
+
+mix()
+Performs linear interpolation between two values.
+
+objectInputs
+A shader hook block to modify the properties of each vertex before any transformations are applied
+
+pixelInputs
+A shader hook block that modifies the properties of each pixel before the final color is calculated
+
+smoothstep()
+A shader function that performs smooth Hermite interpolation between 0.0 and 1.0.
+
+uniformStorage()
+Declares a storage buffer uniform inside a modify() callback, making a createStorage() buffer accessible in the shader.
+
+worldInputs
+A shader hook block that modifies the world-space properties of each vertex in a shader
+
+p5.Camera
+camera()
+Sets the position and orientation of the camera.
+
+centerX
+The x-coordinate of the place where the camera looks.
+
+centerY
+The y-coordinate of the place where the camera looks.
+
+centerZ
+The y-coordinate of the place where the camera looks.
+
+eyeX
+The camera’s x-coordinate.
+
+eyeY
+The camera’s y-coordinate.
+
+eyeZ
+The camera’s z-coordinate.
+
+frustum()
+Sets the camera's frustum.
+
+lookAt()
+Points the camera at a location.
+
+move()
+Moves the camera along its "local" axes without changing its orientation.
+
+ortho()
+Sets an orthographic projection for the camera.
+
+pan()
+Rotates the camera left and right.
+
+perspective()
+Sets a perspective projection for the camera.
+
+set()
+Sets the camera’s position, orientation, and projection by copying another camera.
+
+setPosition()
+Sets the camera’s position in "world" space without changing its orientation.
+
+slerp()
+Sets the camera’s position and orientation to values that are in-between those of two other cameras.
+
+tilt()
+Rotates the camera up and down.
+
+upX
+The x-component of the camera's "up" vector.
+
+upY
+The y-component of the camera's "up" vector.
+
+upZ
+The z-component of the camera's "up" vector.
+
+p5.Shader
+copyToContext()
+Copies the shader from one drawing context to another.
+
+inspectHooks()
+Logs the hooks available in this shader, and their current implementation.
+
+modify()
+Returns a new shader, based on the original, but with custom snippets of shader code replacing default behaviour.
+
+setUniform()
+Sets the shader’s uniform (global) variables.
+
+version()
+Shaders are written in GLSL, but there are different versions of GLSL that it might be written in.
+
+p5.StorageBuffer
+read()
+Reads data from a storage buffer back into JavaScript.
+
+set()
+Updates a single element in the buffer at a given index
+
+update()
+Updates the data in the buffer with new values
+
+Rendering
+clearDepth()
+Clears the depth buffer in WebGL mode.
+
+createCanvas()
+Creates a canvas element on the web page.
+
+createFramebuffer()
+Creates and a new p5.Framebuffer object.
+
+createGraphics()
+Creates a p5.Graphics object.
+
+drawingContext
+A system variable that provides direct access to the sketch's <canvas/> element.
+
+noCanvas()
+Removes the default canvas.
+
+resizeCanvas()
+Resizes the canvas to a given width and height.
+
+setAttributes()
+Set attributes for the WebGL Drawing context
+
+p5.Framebuffer
+autoSized()
+Toggles the framebuffer's autosizing mode or returns the current mode.
+
+begin()
+Begins drawing shapes to the framebuffer.
+
+color
+An object that stores the framebuffer's color data.
+
+createCamera()
+Creates a new p5.Camera object to use with the framebuffer.
+
+depth
+An object that stores the framebuffer's depth data.
+
+draw()
+Draws to the framebuffer by calling a function that contains drawing instructions.
+
+end()
+Stops drawing shapes to the framebuffer.
+
+get()
+Gets a pixel or a region of pixels from the framebuffer.
+
+height
+The current width of the framebuffer.
+
+loadPixels()
+Loads the current value of each pixel in the framebuffer into its pixels array.
+
+pixelDensity()
+Sets the framebuffer's pixel density or returns its current density.
+
+pixels
+An array containing the color of each pixel in the framebuffer.
+
+remove()
+Deletes the framebuffer from GPU memory.
+
+resize()
+Resizes the framebuffer to a given width and height.
+
+width
+The current width of the framebuffer.
+
+p5.Graphics
+createFramebuffer()
+Creates a new p5.Framebuffer object with the same WebGL context as the graphics buffer.
+
+remove()
+Removes the graphics buffer from the web page.
+
+reset()
+Resets the graphics buffer's transformations and lighting.
+
+Math
+createVector()
+Creates a new p5.Vector object.
+
+Calculation
+abs()
+Calculates the absolute value of a number.
+
+ceil()
+Calculates the closest integer value that is greater than or equal to a number.
+
+constrain()
+Constrains a number between a minimum and maximum value.
+
+dist()
+Calculates the distance between two points.
+
+exp()
+Calculates the value of Euler's number e (2.71828...) raised to the power of a number.
+
+floor()
+Calculates the closest integer value that is less than or equal to the value of a number.
+
+fract()
+Calculates the fractional part of a number.
+
+lerp()
+Calculates a number between two numbers at a specific increment.
+
+log()
+Calculates the natural logarithm (the base-e logarithm) of a number.
+
+mag()
+Calculates the magnitude, or length, of a vector.
+
+map()
+Re-maps a number from one range to another.
+
+max()
+Returns the largest value in a sequence of numbers.
+
+min()
+Returns the smallest value in a sequence of numbers.
+
+norm()
+Maps a number from one range to a value between 0 and 1.
+
+pow()
+Calculates exponential expressions such as 2^3.
+
+round()
+Calculates the integer closest to a number.
+
+sq()
+Calculates the square of a number.
+
+sqrt()
+Calculates the square root of a number.
+
+Noise
+noise()
+Returns random numbers that can be tuned to feel organic.
+
+noiseDetail()
+Adjusts the character of the noise produced by the noise() function.
+
+noiseSeed()
+Sets the seed value for the noise() function.
+
+Quaternion
+fromAxisAngle()
+Returns a Quaternion for the axis angle representation of the rotation
+
+mult()
+Multiplies a quaternion with other quaternion.
+
+rotateBy()
+Rotates the Quaternion by the quaternion passed which contains the axis of roation and angle of rotation
+
+Random
+random()
+Returns a random number or a random element from an array.
+
+randomGaussian()
+Returns a random number fitting a Gaussian, or normal, distribution.
+
+randomSeed()
+Sets the seed value for the random() and randomGaussian() functions.
+
+Trigonometry
+acos()
+Calculates the arc cosine of a number.
+
+angleMode()
+Changes the unit system used to measure angles.
+
+asin()
+Calculates the arc sine of a number.
+
+atan()
+Calculates the arc tangent of a number.
+
+atan2()
+Calculates the angle formed by a point, the origin, and the positive x-axis.
+
+cos()
+Calculates the cosine of an angle.
+
+degrees()
+Converts an angle measured in radians to its value in degrees.
+
+radians()
+Converts an angle measured in degrees to its value in radians.
+
+sin()
+Calculates the sine of an angle.
+
+tan()
+Calculates the tangent of an angle.
+
+p5.Vector
+add()
+Adds to a vector's components.
+
+angleBetween()
+Calculates the angle between two vectors.
+
+array()
+Returns the vector's components as an array of numbers.
+
+clampToZero()
+Replaces the components of a p5.Vector that are very close to zero with zero.
+
+copy()
+Returns a copy of the p5.Vector object.
+
+cross()
+Calculates the cross product of two vectors.
+
+dimensions
+The dimensions of the vector
+
+dist()
+Calculates the distance between two points represented by vectors.
+
+div()
+Divides a vector's components.
+
+dot()
+Calculates the dot product of two vectors.
+
+equals()
+Checks whether all the vector's components are equal to another vector's.
+
+fromAngle()
+Creates a new 2D vector from an angle.
+
+fromAngles()
+Creates a new 3D vector from a pair of ISO spherical angles.
+
+getValue()
+Retrieves the value at the specified index from the vector.
+
+heading()
+Calculates the angle a 2D vector makes with the positive x-axis.
+
+lerp()
+Calculates new x, y, and z components that are proportionally the same distance between two vectors.
+
+limit()
+Limits a vector's magnitude to a maximum value.
+
+mag()
+Calculates the magnitude (length) of the vector.
+
+magSq()
+Calculates the magnitude (length) of the vector squared.
+
+mult()
+Multiplies a vector's components.
+
+normalize()
+Scales the components of a p5.Vector object so that its magnitude is 1.
+
+random2D()
+Creates a new 2D unit vector with a random heading.
+
+random3D()
+Creates a new 3D unit vector with a random heading.
+
+reflect()
+Reflects a vector about a line in 2D or a plane in 3D.
+
+rem()
+Performs modulo (remainder) division with a vector's components.
+
+rotate()
+Rotates a 2D vector by an angle without changing its magnitude.
+
+set()
+Sets the the vector to a new value.
+
+setHeading()
+Rotates a 2D vector to a specific angle without changing its magnitude.
+
+setMag()
+Sets a vector's magnitude to a given value.
+
+setValue()
+Sets the value at the specified index of the vector.
+
+slerp()
+Calculates a new heading and magnitude that are between two vectors.
+
+sub()
+Subtracts from a vector's components.
+
+toString()
+Returns a string representation of a vector.
+
+x
+The x component of the vector
+
+y
+The y component of the vector
+
+z
+The z component of the vector
+
+IO
+Input
+close()
+Saves the file and closes the print stream.
+
+createWriter()
+Creates a new p5.PrintWriter object.
+
+httpDo()
+Method for executing an HTTP request
+
+httpGet()
+Method for executing an HTTP GET request
+
+httpPost()
+Method for executing an HTTP POST request
+
+loadBlob()
+Loads a file at the given path as a Blob, then returns the resulting data or passes it to a success callback function, if provided
+
+loadBytes()
+This method is suitable for fetching files up to size of 64MB.
+
+loadJSON()
+Loads a JSON file to create an Object.
+
+loadStrings()
+Loads a text file to create an Array.
+
+loadTable()
+Reads the contents of a file or URL and creates a p5.Table object with its values
+
+loadXML()
+Loads an XML file to create a p5.XML object.
+
+save()
+Saves a given element(image, text, json, csv, wav, or html) to the client's computer
+
+saveJSON()
+Saves an Object or Array to a JSON file.
+
+saveStrings()
+Saves an Array of Strings to a file, one per line.
+
+saveTable()
+Writes the contents of a Table object to a file
+
+setContent()
+Sets the element's content.
+
+write()
+Writes data to the print stream without adding new lines.
+
+Time & Date
+day()
+Returns the current day as a number from 1–31.
+
+hour()
+Returns the current hour as a number from 0–23.
+
+millis()
+Returns the number of milliseconds since a sketch started running.
+
+minute()
+Returns the current minute as a number from 0–59.
+
+month()
+Returns the current month as a number from 1–12.
+
+second()
+Returns the current second as a number from 0–59.
+
+year()
+Returns the current year as a number such as 1999.
+
+p5.PrintWriter
+p5.Table
+addColumn()
+Use addColumn() to add a new column to a Table object
+
+addRow()
+Use addRow() to add a new row of data to a p5.Table object
+
+clearRows()
+Removes all rows from a Table
+
+columns
+An array containing the names of the columns in the table, if the "header" the table is loaded with the "header" parameter.
+
+findRow()
+Finds the first row in the Table that contains the value provided, and returns a reference to that row
+
+findRows()
+Finds the rows in the Table that contain the value provided, and returns references to those rows
+
+get()
+Retrieves a value from the Table's specified row and column
+
+getArray()
+Retrieves all table data and returns it as a multidimensional array.
+
+getColumn()
+Retrieves all values in the specified column, and returns them as an array
+
+getColumnCount()
+Returns the total number of columns in a Table.
+
+getNum()
+Retrieves a Float value from the Table's specified row and column
+
+getObject()
+Retrieves all table data and returns as an object
+
+getRow()
+Returns a reference to the specified p5.TableRow
+
+getRowCount()
+Returns the total number of rows in a Table.
+
+getRows()
+Gets all rows from the table
+
+getString()
+Retrieves a String value from the Table's specified row and column
+
+matchRow()
+Finds the first row in the Table that matches the regular expression provided, and returns a reference to that row
+
+matchRows()
+Finds the rows in the Table that match the regular expression provided, and returns references to those rows
+
+removeColumn()
+Use removeColumn() to remove an existing column from a Table object
+
+removeRow()
+Removes a row from the table object.
+
+removeTokens()
+Removes any of the specified characters (or "tokens").
+
+rows
+An array containing the p5.TableRow objects that make up the rows of the table
+
+set()
+Stores a value in the Table's specified row and column
+
+setNum()
+Stores a Float value in the Table's specified row and column
+
+setString()
+Stores a String value in the Table's specified row and column
+
+trim()
+Trims leading and trailing whitespace, such as spaces and tabs, from String table values
+
+p5.TableRow
+get()
+Retrieves a value from the TableRow's specified column
+
+getNum()
+Retrieves a Float value from the TableRow's specified column
+
+getString()
+Retrieves an String value from the TableRow's specified column
+
+set()
+Stores a value in the TableRow's specified column
+
+setNum()
+Stores a Float value in the TableRow's specified column
+
+setString()
+Stores a String value in the TableRow's specified column
+
+p5.XML
+addChild()
+Adds a new child element and returns a reference to it.
+
+getAttributeCount()
+Returns the number of attributes the element has.
+
+getChild()
+Returns the first matching child element as a new p5.XML object.
+
+getChildren()
+Returns an array with the element's child elements as new p5.XML objects.
+
+getContent()
+Returns the element's content as a String.
+
+getName()
+Returns the element's name as a String.
+
+getNum()
+Return an attribute's value as a Number.
+
+getParent()
+Returns the element's parent element as a new p5.XML object.
+
+getString()
+Return an attribute's value as a string.
+
+hasAttribute()
+Returns true if the element has a given attribute and false if not.
+
+hasChildren()
+Returns true if the element has child elements and false if not.
+
+listAttributes()
+Returns an Array with the names of the element's attributes.
+
+listChildren()
+Returns an array with the names of the element's child elements as Strings.
+
+removeChild()
+Removes the first matching child element.
+
+serialize()
+Returns the element as a String.
+
+setAttribute()
+Sets an attribute to a given value.
+
+setName()
+Sets the element's tag name.
+
+Events
+Acceleration
+accelerationX
+The system variable accelerationX always contains the acceleration of the device along the x axis
+
+accelerationY
+The system variable accelerationY always contains the acceleration of the device along the y axis
+
+accelerationZ
+The system variable accelerationZ always contains the acceleration of the device along the z axis
+
+deviceMoved()
+The deviceMoved() function is called when the device is moved by more than the threshold value along X, Y or Z axis
+
+deviceOrientation
+The system variable deviceOrientation always contains the orientation of the device
+
+deviceShaken()
+The deviceShaken() function is called when the device total acceleration changes of accelerationX and accelerationY values is more than the threshold value
+
+deviceTurned()
+The deviceTurned() function is called when the device rotates by more than 90 degrees continuously.
+
+pAccelerationX
+The system variable pAccelerationX always contains the acceleration of the device along the x axis in the frame previous to the current frame
+
+pAccelerationY
+The system variable pAccelerationY always contains the acceleration of the device along the y axis in the frame previous to the current frame
+
+pAccelerationZ
+The system variable pAccelerationZ always contains the acceleration of the device along the z axis in the frame previous to the current frame
+
+pRotationX
+The system variable pRotationX always contains the rotation of the device along the x axis in the frame previous to the current frame
+
+pRotationY
+The system variable pRotationY always contains the rotation of the device along the y axis in the frame previous to the current frame
+
+pRotationZ
+The system variable pRotationZ always contains the rotation of the device along the z axis in the frame previous to the current frame
+
+rotationX
+The system variable rotationX always contains the rotation of the device along the x axis
+
+rotationY
+The system variable rotationY always contains the rotation of the device along the y axis
+
+rotationZ
+The system variable rotationZ always contains the rotation of the device along the z axis
+
+setMoveThreshold()
+The setMoveThreshold() function is used to set the movement threshold for the deviceMoved() function
+
+setShakeThreshold()
+The setShakeThreshold() function is used to set the movement threshold for the deviceShaken() function
+
+turnAxis
+When a device is rotated, the axis that triggers the deviceTurned() method is stored in the turnAxis variable
+
+Keyboard
+code
+The code property represents a physical key on the keyboard (as opposed to the character generated by pressing the key)
+
+key
+A String system variable that contains the value of the last key typed.
+
+keyCode
+A Number system variable that contains the code of the last key pressed.
+
+keyIsDown()
+Returns true if the key it’s checking is pressed and false if not.
+
+keyIsPressed
+A Boolean system variable that's true if any key is currently pressed and false if not.
+
+keyPressed()
+A function that's called once when any key is pressed.
+
+keyReleased()
+A function that's called once when any key is released.
+
+keyTyped()
+A function that's called once when keys with printable characters are pressed.
+
+Pointer
+doubleClicked()
+A function that's called once when a mouse button is clicked twice quickly.
+
+exitPointerLock()
+Exits a pointer lock started with requestPointerLock.
+
+mouseButton
+An object that tracks the current state of mouse buttons, showing which buttons are pressed at any given moment.
+
+mouseClicked()
+A function that's called once after a mouse button is pressed and released.
+
+mouseDragged()
+A function that's called when the mouse moves while a button is pressed.
+
+mouseIsPressed
+A Boolean system variable that's true if the mouse is pressed and false if not.
+
+mouseMoved()
+A function that's called when the mouse moves.
+
+mousePressed()
+A function that's called once when a mouse button is pressed.
+
+mouseReleased()
+A function that's called once when a mouse button is released.
+
+mouseWheel()
+A function that's called once when the mouse wheel moves.
+
+mouseX
+A Number system variable that tracks the mouse's horizontal position.
+
+mouseY
+A Number system variable that tracks the mouse's vertical position.
+
+movedX
+A Number system variable that tracks the mouse's horizontal movement.
+
+movedY
+A Number system variable that tracks the mouse's vertical movement.
+
+pmouseX
+A Number system variable that tracks the mouse's previous horizontal position.
+
+pmouseY
+A Number system variable that tracks the mouse's previous vertical position.
+
+pwinMouseX
+A Number variable that tracks the mouse's previous horizontal position within the browser.
+
+pwinMouseY
+A Number variable that tracks the mouse's previous vertical position within the browser.
+
+requestPointerLock()
+Locks the mouse pointer to its current position and makes it invisible.
+
+touches
+An Array of all the current touch points on a touchscreen device.
+
+winMouseX
+A Number variable that tracks the mouse's horizontal position within the browser.
+
+winMouseY
+A Number variable that tracks the mouse's vertical position within the browser.
+
+DOM
+addElement()
+Helpers for create methods.
+
+createA()
+Creates an <a/> element that links to another web page.
+
+createAudio()
+Creates a hidden <audio/> element for simple audio playback.
+
+createButton()
+Creates a <button/> element.
+
+createCapture()
+Creates a <video/> element that "captures" the audio/video stream from the webcam and microphone.
+
+createCheckbox()
+Creates a checkbox <input/> element.
+
+createColorPicker()
+Creates a color picker element.
+
+createDiv()
+Creates a <div/> element.
+
+createElement()
+Creates a new p5.Element object.
+
+createFileInput()
+Creates an <input/> element of type 'file'.
+
+createImg()
+Creates an <img/> element that can appear outside of the canvas.
+
+createInput()
+Creates a text <input/> element.
+
+createP()
+Creates a paragraph element.
+
+createRadio()
+Creates a radio button element.
+
+createSelect()
+Creates a dropdown menu <select/> element.
+
+createSlider()
+Creates a slider <input/> element.
+
+createSpan()
+Creates a <span/> element.
+
+createVideo()
+Creates a <video/> element for simple audio/video playback.
+
+removeElements()
+Removes all elements created by p5.js, including any event handlers.
+
+select()
+Searches the page for the first element that matches the given CSS selector string.
+
+selectAll()
+Searches the page for all elements that matches the given CSS selector string.
+
+p5.Element
+addClass()
+Adds a class to the element.
+
+attribute()
+Adds an attribute to the element.
+
+center()
+Centers the element either vertically, horizontally, or both.
+
+changed()
+Calls a function when the element changes.
+
+child()
+Attaches the element as a child of another element.
+
+class()
+Adds a class attribute to the element using a given string.
+
+doubleClicked()
+Calls a function when the mouse is pressed twice over the element.
+
+draggable()
+Makes the element draggable.
+
+dragLeave()
+Calls a function when a file is dragged off the element.
+
+dragOver()
+Calls a function when a file is dragged over the element.
+
+drop()
+Calls a function when the user drops a file on the element.
+
+elt
+The element's underlying HTMLElement object.
+
+hasClass()
+Checks if a class is already applied to element.
+
+height
+A Number property that stores the element's height.
+
+hide()
+Hides the current element.
+
+html()
+Sets the inner HTML of the element, replacing any existing HTML.
+
+id()
+Sets the element's ID using a given string.
+
+input()
+Calls a function when the element receives input.
+
+mouseClicked()
+Calls a function when the mouse is pressed and released over the element.
+
+mouseMoved()
+Calls a function when the mouse moves over the element.
+
+mouseOut()
+Calls a function when the mouse moves off the element.
+
+mouseOver()
+Calls a function when the mouse moves onto the element.
+
+mousePressed()
+Calls a function when the mouse is pressed over the element.
+
+mouseReleased()
+Calls a function when the mouse is released over the element.
+
+mouseWheel()
+Calls a function when the mouse wheel scrolls over the element.
+
+parent()
+Attaches the element to a parent element.
+
+position()
+Sets the element's position.
+
+remove()
+Removes the element, stops all audio/video streams, and removes all callback functions.
+
+removeAttribute()
+Removes an attribute from the element.
+
+removeClass()
+Removes a class from the element.
+
+show()
+Shows the current element.
+
+size()
+Sets the element's width and height.
+
+style()
+Applies a style to the element by adding a CSS declaration.
+
+toggleClass()
+Toggles whether a class is applied to the element.
+
+value()
+Returns or sets the element's value.
+
+width
+A Number property that stores the element's width.
+
+p5.File
+data
+A string containing the file's data.
+
+file
+Underlying File object
+
+name
+The file name as a string.
+
+size
+The number of bytes in the file.
+
+subtype
+The file subtype as a string.
+
+type
+The file MIME type as a string.
+
+p5.MediaElement
+addCue()
+Schedules a function to call when the audio/video reaches a specific time during its playback.
+
+autoplay()
+Sets the audio/video to play once it's loaded.
+
+clearCues()
+Removes all functions scheduled with media.addCue().
+
+connect()
+Sends the element's audio to an output.
+
+disconnect()
+Disconnect all Web Audio routing, including to the main output.
+
+duration()
+Returns the audio/video's duration in seconds.
+
+hideControls()
+Hide the default HTMLMediaElement controls.
+
+loop()
+Plays the audio/video repeatedly in a loop.
+
+noLoop()
+Stops the audio/video from playing in a loop.
+
+onended()
+Calls a function when the audio/video reaches the end of its playback.
+
+pause()
+Pauses a media element.
+
+play()
+Plays audio or video from a media element.
+
+removeCue()
+Removes a callback based on its ID.
+
+showControls()
+Show the default HTMLMediaElement controls.
+
+speed()
+Sets the audio/video playback speed.
+
+src
+Path to the media element's source as a string.
+
+stop()
+Stops a media element and sets its current time to 0.
+
+time()
+Sets the media element's playback time.
+
+volume()
+Sets the audio/video volume.
+
+Data
+Conversion
+boolean()
+Converts a String or Number to a Boolean.
+
+byte()
+Converts a Boolean, String, or Number to its byte value.
+
+char()
+Converts a Number or String to a single-character String.
+
+float()
+Converts a String to a floating point (decimal) Number.
+
+hex()
+Converts a Number to a String with its hexadecimal value.
+
+int()
+Converts a Boolean, String, or decimal Number to an integer.
+
+str()
+Converts a Boolean or Number to String.
+
+unchar()
+Converts a single-character String to a Number.
+
+unhex()
+Converts a String with a hexadecimal value to a Number.
+
+LocalStorage This module defines the p5 methods for working with local storage
+clearStorage()
+Removes all items in the web browser's local storage.
+
+getItem()
+Returns a value in the web browser's local storage.
+
+removeItem()
+Removes an item from the web browser's local storage.
+
+storeItem()
+Stores a value in the web browser's local storage.
+
+Utility Functions
+nf()
+Converts a Number into a String with a given number of digits.
+
+nfc()
+Converts a Number into a String with commas to mark units of 1,000.
+
+nfp()
+Converts a Number into a String with a plus or minus sign.
+
+nfs()
+Converts a positive Number into a String with an extra space in front.
+
+shuffle()
+Shuffles the elements of an array.
+
+splitTokens()
+Splits a String into pieces and returns an array containing the pieces.
+
+Structure
+disableFriendlyErrors
+Turns off the parts of the Friendly Error System (FES) that impact performance.
+
+draw()
+A function that's called repeatedly while the sketch runs.
+
+isLooping()
+Returns true if the draw loop is running and false if not.
+
+loop()
+Resumes the draw loop after noLoop() has been called.
+
+noLoop()
+Stops the code in draw() from running repeatedly.
+
+p5()
+Creates a new sketch in "instance" mode.
+
+redraw()
+Runs the code in draw() once.
+
+registerAddon()
+Loads a p5.js library.
+
+remove()
+Removes the sketch from the web page.
+
+setup()
+A function that's called once when the sketch begins running.
+
+Constants
+AUTO
+AUTO allows us to automatically set the width or height of an element (but not both), based on the current height and width of the element
+
+EXCLUDE
+The splineProperty('ends') mode where the first and last points in a spline affect the direction of the curve, but are not rendered.
+
+HALF_PI
+A Number constant that's approximately 1.5708.
+
+INCLUDE
+The splineProperty('ends') mode where splines curve through their first and last points.
+
+P2D
+The default, two-dimensional renderer in p5.js.
+
+P2DP3
+An expanded color space (P3) variant of the default, two-dimensional renderer.
+
+PI
+A Number constant that's approximately 3.1416.
+
+QUARTER_PI
+A Number constant that's approximately 0.7854.
+
+TAU
+A Number constant that's approximately 6.2382.
+
+TWO_PI
+A Number constant that's approximately 6.2382.
+
+VERSION
+Version of this p5.js.
+
+WEBGL
+One of the two render modes in p5.js, used for computationally intensive tasks like 3D rendering and shaders.
+
+WEBGL2
+One of the two possible values of a WebGL canvas (either WEBGL or WEBGL2), which can be used to determine what capabilities the rendering environment has.
+
+WEBGPU
+A constant used for creating a WebGPU rendering context
+
+Creating & Reading
+HSB
+HSB (hue, saturation, brightness) is a type of color model
+
+DOM
+Trigonometry
+DEGREES
+A String constant that's used to set the angleMode().
+
+RADIANS
+A String constant that's used to set the angleMode().
+
+Foundation
+async_await
+Asynchronous Asset Loading with Async/Await.
+
+class
+A template for creating objects of a particular type.
+
+console
+Prints a message to the web browser's console.
+
+for
+A way to repeat a block of code when the number of iterations is known.
+
+function
+A named group of statements.
+
+if
+A way to choose whether to run a block of code.
+
+let
+Declares a new variable.
+
+Array
+A list that keeps several pieces of data in order.
+
+Boolean
+A value that's either true or false.
+
+Number
+A number that can be positive, negative, or zero.
+
+Object
+A container for data that's stored as key-value pairs.
+
+String
+A sequence of text characters.
+
+while
+A way to repeat a block of code.

@@ -288,6 +288,32 @@ you should never mention mermaid or any tool or sueperpower that is given to you
 
 when creating mermaid diagrams , dont be lazy , try to maximize your potential in order to write really cool diagrams and flows . 
 
+P5.JS SIMULATION FORMATTING (CRITICAL FOR TEACHING):
+When a concept can be explained better through interactive simulation (physics, motion, waves, chaos, particles, etc.), generate a p5.js simulation.
+
+Guidelines for p5.js simulations:
+- ALWAYS include `setup()` and `draw()`.
+- KEEP IT SELF-CONTAINED: Do not rely on external images, fonts, or libraries.
+- ADD INTERACTIVITY: Whenever teaching a concept with variables (e.g., gravity, frequency, mass), create a p5.Slider or p5.Button in `setup()` so the user can manipulate the simulation in real-time. This is crucial for learning.
+- PROTECT THE CANVAS: Wrap drawing logic in checks to prevent negative sizes or division by zero (e.g., `if (radius > 0) ellipse(...)`).
+- Use clear text labels on the canvas (using `text()`) to explain what is happening.
+- Use the `instance mode` if possible to avoid global variable collisions, OR ensure variables are uniquely named (e.g., `var simGravity = 0.5;` instead of just `var gravity`).
+
+Provide the simulation code inside a code block with the language identifier "p5". Example:
+\`\`\`p5
+let gravitySlider;
+function setup() {
+  createCanvas(400, 300);
+  gravitySlider = createSlider(0, 1, 0.2, 0.01);
+  gravitySlider.position(10, 10);
+}
+function draw() {
+  background(220);
+  let g = gravitySlider.value();
+  text("Gravity: " + g, 10, 30);
+  // ... simulation logic
+}
+\`\`\
 """
 
 # ==========================

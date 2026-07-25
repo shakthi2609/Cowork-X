@@ -1,17 +1,59 @@
 import os
 import re
 import json
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from dotenv import load_dotenv
 from syst import SYSTEM_PROMPT, DIAGRAM_FIX_SYSTEM_PROMPT
 import wikipediaapi
 import config  # Now uses dynamic get_client_for_model()
 from mermaid_and_utils import *
+from werkzeug.security import generate_password_hash, check_password_hash
 
 load_dotenv()
 
 app = Flask(__name__)
+# Generate a secure fallback secret key if not provided in environment variables
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "cinderite1010_super_secret_session_key_9831")
+
+# Create a secure hash of the password "cinderite1010" at app initialization
+HASHED_PASSWORD = generate_password_hash("cinderite1010")
+
 conversation_history = []
+
+# ==========================
+# Authentication Middleware & Routes
+# ==========================
+
+@app.before_request
+def check_authentication():
+    # Allow accessing static files, /login, and /logout without authentication
+    if request.path.startswith('/static') or request.path in ['/login', '/logout']:
+        return
+    
+    # If not authenticated, restrict access
+    if not session.get('authenticated'):
+        # For API routes, return a 401 Unauthorized JSON response
+        if request.path in ['/chat', '/fix_diagram', '/wikipedia', '/get_models', '/new_chat']:
+            return jsonify({"success": False, "error": "Unauthorized"}), 401
+        
+        # For main page/browser routes, render the password screen
+        return render_template("initiater.html")
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json() or {}
+    password = data.get("password", "")
+    
+    if check_password_hash(HASHED_PASSWORD, password):
+        session['authenticated'] = True
+        return jsonify({"success": True})
+    
+    return jsonify({"success": False, "error": "Incorrect password. Please try again."})
+
+@app.route("/logout", methods=["POST", "GET"])
+def logout():
+    session.clear()
+    return jsonify({"success": True})
 
 # ==========================
 # Routes
@@ -92,18 +134,23 @@ def chat():
         raw_mermaid = extract_mermaid(reply)
         mermaid_code = sanitize_diagram(raw_mermaid) if raw_mermaid else None
 
+        # NEW: Extract p5.js simulation code
+        p5_code = extract_p5_code(reply)
+
         conversation_history.append({"role": "user", "content": user_message})
         conversation_history.append({"role": "assistant", "content": reply})
 
         if len(conversation_history) > 40:
             del conversation_history[:-40]
 
-        return jsonify({
-            "success": True,
-            "response": reply,
-            "mermaid": mermaid_code,
-            "diagrams": sanitized_diagrams,
-            "tool_calls": tool_results if tool_results else None
+        return jsonify ({
+        "success": True,
+        "response": reply,
+        "mermaid": mermaid_code,
+        "diagrams": sanitized_diagrams,
+        "simulation": p5_code, # <--- Send this to your frontend
+        "tool_calls": tool_results if tool_results else None
+        
         })
 
     except Exception as e:

@@ -30,12 +30,17 @@
   renderer.code = function(codeObj, lang) {
     const code = typeof codeObj === 'object' ? codeObj.text : codeObj;
     const language = typeof codeObj === 'object' ? codeObj.lang : lang;
-
+    
     // Check if this is any Mermaid diagram type
     if (language && MERMAID_LANGUAGES.has(language)) {
       const safeCode = escapeHtml(code);
-
       return '<div class="mermaid-wrapper"><div class="mermaid-raw" style="display:none;">' + safeCode + '</div><div class="mermaid-target"></div></div>';
+    }
+
+    // NEW: Check for p5.js simulations (trimming spaces just in case)
+    if (language && language.trim().toLowerCase() === 'p5') {
+      const safeCode = escapeHtml(code);
+      return '<div class="p5-wrapper"><div class="p5-raw" style="display:none;">' + safeCode + '</div><div class="p5-target" style="width:100%; min-height:420px; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div></div>';
     }
 
     if (language && hljs.getLanguage(language)) {
@@ -48,7 +53,6 @@
     }
     return '<pre><code>' + code + '</code></pre>';
   };
-
   marked.setOptions({
     renderer: renderer,
     breaks: true,
@@ -477,6 +481,73 @@
     }
   }
 
+  // ============ RENDER P5.JS SIMULATIONS ============
+  // ============ RENDER P5.JS SIMULATIONS ============
+   // ============ RENDER P5.JS SIMULATIONS ============
+   function renderP5Simulations(container) {
+    const wrappers = container.querySelectorAll('.p5-wrapper:not([data-processed])');
+    if (wrappers.length === 0) return;
+
+    wrappers.forEach((wrapper) => {
+      wrapper.setAttribute('data-processed', 'true');
+      
+      const rawDiv = wrapper.querySelector('.p5-raw');
+      const targetDiv = wrapper.querySelector('.p5-target');
+      if (!rawDiv || !targetDiv) return;
+
+      // Unescape HTML entities back to raw JS code
+      const txt = document.createElement('textarea');
+      txt.innerHTML = rawDiv.textContent;
+      const code = txt.value.trim();
+
+      if (!code) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.style.width = '100%';
+      iframe.style.height = '420px';
+      iframe.style.border = 'none';
+      iframe.style.display = 'block';
+      iframe.style.background = '#f5f5f5';
+      iframe.sandbox = 'allow-scripts allow-modals allow-same-origin';
+
+      // UPDATED: Removed the IIFE wrapper so p5.js can find setup() and draw()
+      const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"><\/script>
+  <style>
+    body { 
+      margin: 0; 
+      overflow: hidden; 
+      background: #f5f5f5; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh;
+    }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <script>
+    // Catch errors without breaking p5.js global scope
+    window.addEventListener('error', function(e) {
+      document.body.innerHTML = '<div style="color:#ff4757;padding:20px;text-align:center;font-family:sans-serif;">\u26a0\ufe0f Simulation error: ' + e.message + '</div>';
+    });
+    
+    // Run the AI's code directly in the global scope
+    ${code}
+  <\/script>
+</body>
+</html>
+      `;
+      iframe.srcdoc = htmlContent;
+      targetDiv.appendChild(iframe);
+    });
+  }
+
   /* ============ 5. CHAT LOGIC ============ */
   textarea.addEventListener('input', () => {
     textarea.style.height = 'auto';
@@ -616,6 +687,7 @@
     
     // Render Mermaid Diagrams if present
     await renderMermaidDiagrams(bubble);
+    renderP5Simulations(bubble);
     
     chatScroll.scrollTop = chatScroll.scrollHeight;
   }
@@ -668,7 +740,7 @@
     
     // Render Mermaid Diagrams if present
     await renderMermaidDiagrams(bubble);
-    
+    renderP5Simulations(bubble); // render ps5 simulations
     chatScroll.scrollTop = chatScroll.scrollHeight;
   }
 
@@ -740,14 +812,19 @@
     }
   });
 
-  document.getElementById('logoutBtn').addEventListener('click', () => {
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
     profileDropdown.classList.remove('show');
+    try {
+      await fetch('/logout', { method: 'POST' });
+    } catch (e) {
+      console.error('Failed to clear session on logout', e);
+    }
     document.getElementById('logoutScreen').classList.add('show');
   });
 
   document.getElementById('loginBackBtn').addEventListener('click', () => {
-    document.getElementById('logoutScreen').classList.remove('show');
-    showToast('Logged back in successfully');
+    // Reload the page to require entering the access password again securely
+    window.location.reload();
   });
 
   document.getElementById('newChatBtn').addEventListener('click', async () => {

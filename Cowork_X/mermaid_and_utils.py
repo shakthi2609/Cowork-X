@@ -430,7 +430,11 @@ def execute_tool_call(tool_call):
 
 
 
+# p5js
 
-
-
-
+def extract_p5_code(reply):
+    # Finds content inside ```p5 ... ``` blocks
+    match = re.search(r'```p5\s*\n(.*?)\n```', reply, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return None

@@ -130,13 +130,19 @@
 
   function initPanZoom(svgElement, wrapper) {
     if (!svgElement || !wrapper) return;
-    
+  
     // Clean up existing instance
     if (panZoomInstances.has(wrapper)) {
       const old = panZoomInstances.get(wrapper);
       try { old.destroy(); } catch(e) {}
     }
-    
+  
+    // Remove old controls and zoom level to recreate fresh
+    const oldControls = wrapper.querySelector('.mermaid-zoom-controls');
+    if (oldControls) oldControls.remove();
+    const oldZoomLevel = wrapper.querySelector('.mermaid-zoom-level');
+    if (oldZoomLevel) oldZoomLevel.remove();
+  
     try {
       const instance = svgPanZoom(svgElement, {
         zoomEnabled: true,
@@ -153,41 +159,29 @@
         onZoom: function(){ wrapper.style.cursor = 'grab'; },
         beforePan: function(){ wrapper.style.cursor = 'grabbing'; }
       });
-      
+  
       panZoomInstances.set(wrapper, instance);
-      
+  
       // Add zoom controls
-      let controls = wrapper.querySelector('.mermaid-zoom-controls');
-      if (!controls) {
-        controls = document.createElement('div');
-        controls.className = 'mermaid-zoom-controls';
-        controls.innerHTML = '\
-          <button class="zoom-btn" data-action="zoom-in" title="Zoom In"><i class="fas fa-plus"></i></button>\
-          <button class="zoom-btn" data-action="zoom-out" title="Zoom Out"><i class="fas fa-minus"></i></button>\
-          <button class="zoom-btn" data-action="reset" title="Reset View"><i class="fas fa-expand"></i></button>\
-          <button class="zoom-btn" data-action="fit" title="Fit to View"><i class="fas fa-arrows-alt"></i></button>\
-        ';
-        wrapper.appendChild(controls);
-        
-        controls.addEventListener('click', (e) => {
-          const btn = e.target.closest('.zoom-btn');
-          if (!btn) return;
-          const action = btn.dataset.action;
-          if (action === 'zoom-in') instance.zoomIn();
-          else if (action === 'zoom-out') instance.zoomOut();
-          else if (action === 'reset') { instance.resetZoom(); instance.center(); }
-          else if (action === 'fit') { instance.fit(); instance.center(); }
-        });
-      }
-      
+      const controls = document.createElement('div');
+      controls.className = 'mermaid-zoom-controls';
+      controls.innerHTML = `
+        <button class="zoom-btn" data-action="zoom-in" title="Zoom In"><i class="fas fa-plus"></i></button>
+        <button class="zoom-btn" data-action="zoom-out" title="Zoom Out"><i class="fas fa-minus"></i></button>
+        <button class="zoom-btn" data-action="reset" title="Reset View"><i class="fas fa-expand"></i></button>
+        <button class="zoom-btn" data-action="fit" title="Fit to View"><i class="fas fa-arrows-alt"></i></button>
+        <button class="zoom-btn" data-action="copy-code" title="Copy Mermaid Code"><i class="fas fa-copy"></i></button>
+        <button class="zoom-btn" data-action="download-svg" title="Download SVG"><i class="fas fa-file-code"></i></button>
+        <button class="zoom-btn" data-action="download-png" title="Download PNG"><i class="fas fa-image"></i></button>
+        <button class="zoom-btn" data-action="fullscreen" title="Fullscreen"><i class="fas fa-expand-arrows-alt"></i></button>
+      `;
+      wrapper.appendChild(controls);
+  
       // Add zoom level indicator
-      let zoomLevel = wrapper.querySelector('.mermaid-zoom-level');
-      if (!zoomLevel) {
-        zoomLevel = document.createElement('div');
-        zoomLevel.className = 'mermaid-zoom-level';
-        wrapper.appendChild(zoomLevel);
-      }
-      
+      const zoomLevel = document.createElement('div');
+      zoomLevel.className = 'mermaid-zoom-level';
+      wrapper.appendChild(zoomLevel);
+  
       // Update zoom level display
       const updateZoomLevel = () => {
         const zoom = instance.getZoom();
@@ -196,7 +190,131 @@
       instance.setOnZoom(updateZoomLevel);
       instance.setOnPan(updateZoomLevel);
       updateZoomLevel();
-      
+  
+      // ---- Event listeners for controls ----
+      controls.addEventListener('click', (e) => {
+        const btn = e.target.closest('.zoom-btn');
+        if (!btn) return;
+        const action = btn.dataset.action;
+  
+        if (action === 'zoom-in') instance.zoomIn();
+        else if (action === 'zoom-out') instance.zoomOut();
+        else if (action === 'reset') { instance.resetZoom(); instance.center(); }
+        else if (action === 'fit') { instance.fit(); instance.center(); }
+        else if (action === 'copy-code') {
+          const rawDiv = wrapper.querySelector('.mermaid-raw');
+          if (rawDiv) {
+            const code = rawDiv.textContent.trim();
+            navigator.clipboard.writeText(code).then(() => {
+              showToast('Mermaid code copied to clipboard!');
+            }).catch(() => {
+              // Fallback
+              const textarea = document.createElement('textarea');
+              textarea.value = code;
+              document.body.appendChild(textarea);
+              textarea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textarea);
+              showToast('Mermaid code copied!');
+            });
+          }
+        } else if (action === 'download-svg') {
+          const svg = wrapper.querySelector('.mermaid-target svg');
+          if (svg) {
+            const serializer = new XMLSerializer();
+            const svgStr = serializer.serializeToString(svg);
+            const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `diagram-${Date.now()}.svg`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('SVG downloaded!');
+          }
+        } else if (action === 'download-png') {
+          const svg = wrapper.querySelector('.mermaid-target svg');
+          if (svg) {
+            const clone = svg.cloneNode(true);
+            const bbox = svg.getBBox();
+            clone.setAttribute('width', bbox.width + 20);
+            clone.setAttribute('height', bbox.height + 20);
+            const canvas = document.createElement('canvas');
+            canvas.width = bbox.width + 20;
+            canvas.height = bbox.height + 20;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const img = new Image();
+            const svgData = new XMLSerializer().serializeToString(clone);
+            const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(svgBlob);
+            img.onload = function() {
+              ctx.drawImage(img, 10, 10, bbox.width, bbox.height);
+              URL.revokeObjectURL(url);
+              const pngUrl = canvas.toDataURL('image/png');
+              const a = document.createElement('a');
+              a.href = pngUrl;
+              a.download = `diagram-${Date.now()}.png`;
+              a.click();
+              showToast('PNG downloaded!');
+            };
+            img.src = url;
+          }
+        } else if (action === 'fullscreen') {
+          // Create overlay if not exists
+          let overlay = document.getElementById('diagramOverlay');
+          if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'diagramOverlay';
+            overlay.className = 'diagram-overlay';
+            document.body.appendChild(overlay);
+  
+            // Close button
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'close-btn';
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            closeBtn.addEventListener('click', () => {
+              document.body.removeChild(overlay);
+            });
+            overlay.appendChild(closeBtn);
+  
+            // Click outside to close
+            overlay.addEventListener('click', (e) => {
+              if (e.target === overlay) {
+                document.body.removeChild(overlay);
+              }
+            });
+          }
+  
+          // Clone the current wrapper
+          const wrapperClone = wrapper.cloneNode(true);
+          wrapperClone.setAttribute('data-processed', 'true');
+  
+          // Remove any existing controls/zoom level from clone (will be recreated)
+          const oldControlsClone = wrapperClone.querySelector('.mermaid-zoom-controls');
+          if (oldControlsClone) oldControlsClone.remove();
+          const oldZoomClone = wrapperClone.querySelector('.mermaid-zoom-level');
+          if (oldZoomClone) oldZoomClone.remove();
+  
+          // Clear existing content in overlay (except close button)
+          const existingContent = overlay.querySelector('.mermaid-wrapper');
+          if (existingContent) existingContent.remove();
+  
+          overlay.appendChild(wrapperClone);
+  
+          // Re-initialize pan-zoom on the cloned SVG
+          const svgClone = wrapperClone.querySelector('.mermaid-target svg');
+          if (svgClone) {
+            setTimeout(() => {
+              initPanZoom(svgClone, wrapperClone);
+            }, 50);
+          }
+  
+          showToast('Fullscreen mode (click X or outside to close)');
+        }
+      });
+  
       // Keyboard shortcuts for zoom
       const keyHandler = (e) => {
         if (e.ctrlKey && (e.key === '=' || e.key === '+')) {
@@ -211,10 +329,10 @@
           instance.center();
         }
       };
-      
+  
       wrapper.addEventListener('keydown', keyHandler);
       wrapper._keyHandler = keyHandler;
-      
+  
       return instance;
     } catch (error) {
       console.warn('svg-pan-zoom init failed:', error);
@@ -359,6 +477,60 @@
     }
   }
 
+  // ============ RENDER P5.JS SIMULATIONS ============
+function renderP5Simulations(container) {
+  const codeBlocks = container.querySelectorAll('code.language-p5');
+  if (codeBlocks.length === 0) return;
+
+  codeBlocks.forEach((codeBlock) => {
+    const code = codeBlock.textContent.trim();
+    if (!code) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'simulation-wrapper';
+    wrapper.style.margin = '10px 0';
+    wrapper.style.borderRadius = '8px';
+    wrapper.style.overflow = 'hidden';
+    wrapper.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+
+    const iframe = document.createElement('iframe');
+    iframe.style.width = '100%';
+    iframe.style.height = '420px';
+    iframe.style.border = 'none';
+    iframe.style.display = 'block';
+    iframe.style.background = '#f5f5f5';
+    iframe.sandbox = 'allow-scripts allow-modals allow-same-origin';
+
+    const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"><\/script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <script>
+    (function() {
+      try {
+        ${code}
+      } catch (e) {
+        document.body.innerHTML = '<div style="color:#ff4757;padding:20px;text-align:center;">\u26a0\ufe0f Simulation error: ' + e.message + '</div>';
+      }
+    })();
+  <\/script>
+</body>
+</html>
+    `;
+    iframe.srcdoc = htmlContent;
+    wrapper.appendChild(iframe);
+    codeBlock.parentNode.replaceWith(wrapper);
+  });
+}
+
   /* ============ 5. CHAT LOGIC ============ */
   textarea.addEventListener('input', () => {
     textarea.style.height = 'auto';
@@ -498,6 +670,7 @@
     
     // Render Mermaid Diagrams if present
     await renderMermaidDiagrams(bubble);
+    renderP5Simulations(bubble);
     
     chatScroll.scrollTop = chatScroll.scrollHeight;
   }
@@ -550,7 +723,7 @@
     
     // Render Mermaid Diagrams if present
     await renderMermaidDiagrams(bubble);
-    
+    renderP5Simulations(bubble); // render ps5 simulations
     chatScroll.scrollTop = chatScroll.scrollHeight;
   }
 
@@ -622,14 +795,19 @@
     }
   });
 
-  document.getElementById('logoutBtn').addEventListener('click', () => {
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
     profileDropdown.classList.remove('show');
+    try {
+      await fetch('/logout', { method: 'POST' });
+    } catch (e) {
+      console.error('Failed to clear session on logout', e);
+    }
     document.getElementById('logoutScreen').classList.add('show');
   });
 
   document.getElementById('loginBackBtn').addEventListener('click', () => {
-    document.getElementById('logoutScreen').classList.remove('show');
-    showToast('Logged back in successfully');
+    // Reload the page to require entering the access password again securely
+    window.location.reload();
   });
 
   document.getElementById('newChatBtn').addEventListener('click', async () => {
@@ -684,7 +862,7 @@ async function fetchAndPopulateModels() {
       // Clear existing options
       modelSelect.innerHTML = '';
       
-      // Add options – models are simple strings, not objects
+      // Add options
       data.models.forEach(modelName => {
         const option = document.createElement('option');
         option.value = modelName;
@@ -692,12 +870,18 @@ async function fetchAndPopulateModels() {
         modelSelect.appendChild(option);
       });
       
-      // Optionally, select the first one by default
-      if (data.models.length > 0) {
+      // --- RESTORE SAVED MODEL FROM LOCALSTORAGE ---
+      const savedModel = localStorage.getItem('cowork-selected-model');
+      if (savedModel && data.models.includes(savedModel)) {
+        modelSelect.value = savedModel;
+      } else if (data.models.length > 0) {
+        // Fallback to first model
         modelSelect.value = data.models[0];
+        // Save it as default
+        localStorage.setItem('cowork-selected-model', data.models[0]);
       }
       
-      console.log('Models populated successfully:', data.models);
+      console.log('Models populated successfully. Selected:', modelSelect.value);
     } else {
       console.error('Failed to load models:', data.error || 'Unknown error');
     }
@@ -706,8 +890,20 @@ async function fetchAndPopulateModels() {
   }
 }
 
-// Call it when the page loads
-document.addEventListener('DOMContentLoaded', fetchAndPopulateModels);
+// When page loads: fetch models, restore saved selection, and listen for changes
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. Fetch and populate the dropdown
+  fetchAndPopulateModels();
+
+  // 2. Listen for model changes and save to localStorage
+  const modelSelect = document.getElementById('modelSelect');
+  if (modelSelect) {
+    modelSelect.addEventListener('change', function() {
+      localStorage.setItem('cowork-selected-model', this.value);
+      console.log('Model saved:', this.value);
+    });
+  }
+});
 
 function buildTavilyCard(result) {
   if (!result || !result.results || result.results.length === 0) {
