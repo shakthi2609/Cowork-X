@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cowork Understand > learn</title>
+
+{% include 'imports.html' %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='nts.css') }}">
+ 
+
+
+</head>
+<body>
+
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-logo">C</div>
+        <span>Cowork™</span>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn-sm" title="Open Settings" id="openSettingsBtn">
+          <i class="fas fa-gear"></i>
+        </button>
+        <button class="icon-btn-sm" title="Collapse sidebar" id="collapseBtn">
+          <i class="fas fa-table-columns"></i>
+        </button>
+      </div>
+    </div>
+
+    <button class="new-chat-btn" id="newChatBtn">
+      <span>New chat</span>
+      <i class="fas fa-plus"></i>
+    </button>
+
+    <div class="history-section" id="historySection">
+      <div class="history-group-label"></div>
+      <!-- History items will be injected here by JS -->
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-card" id="userCardBtn">
+        <div class="avatar">C</div>
+        <div class="user-info">
+          <div class="user-name">edu</div>
+          <div class="user-plan">Free plan · Cowork™</div>
+        </div>
+        <i class="fas fa-chevron-up" style="color: var(--fg-tertiary); font-size: 12px;"></i>
+      </div>
+
+      <!-- Profile Dropdown -->
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="dropdown-item" id="openSettingsDropdownBtn">
+          <i class="fas fa-gear"></i> Settings
+        </div>
+        <div class="dropdown-item">
+          <i class="fas fa-circle-question"></i> Help & FAQ
+        </div>
+        <div class="dropdown-item danger" id="logoutBtn">
+          <i class="fas fa-right-from-bracket"></i> Log out
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main chat area -->
+  <main class="chat-area">
+    <div class="chat-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+
+    <header class="top-bar">
+     <div class="top-bar-left">
+  <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+  
+  <!-- ADD THIS HERE -->
+  <div class="model-selector">
+    <select id="modelSelect">
+      <option>Loading models...</option>
+    </select>
+  </div>
+
+  <span class="top-bar-title">Chat with <strong>Cowork™</strong></span>
+</div>
+      <div class="top-bar-right">
+        <button class="pill-btn" id="shareBtn">
+          <i class="fas fa-arrow-up-from-bracket"></i>
+          Share
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+          <i class="fas fa-sun icon-sun"></i>
+          <i class="fas fa-moon icon-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <section class="chat-content">
+      <div class="chat-scroll" id="chatScroll">
+        <div class="greeting" id="greeting">
+          <h1>Hi, I'm Cowork™.</h1>
+          <p>How can I help you today?</p>
+        </div>
+        <!-- Messages will be injected here -->
+      </div>
+
+      <div class="chat-footer">
+        <div class="input-container">
+          <textarea class="input-textarea" id="messageInput" placeholder="Message Cowork™" rows="1"></textarea>
+          <div class="input-actions">
+            <button class="send-btn" id="sendBtn" disabled aria-label="Send">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          Cowork™ can make mistakes. Check important info.
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Settings</div>
+      <button class="icon-btn-sm" id="closeSettingsBtn"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="settings-row">
+        <div class="settings-info">
+          <h4>Dark Mode</h4>
+          <p>Toggle dark theme for the interface</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn primary" id="saveSettingsBtn">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Logout Screen -->
+<div class="logout-overlay" id="logoutScreen">
+  <div class="logout-icon"><i class="fas fa-right-from-bracket"></i></div>
+  <h2>You've been logged out</h2>
+  <p>Thanks for using Cowork™. See you soon!</p>
+  <button class="btn primary" id="loginBackBtn">Log back in</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+
+</body>
+</html>
