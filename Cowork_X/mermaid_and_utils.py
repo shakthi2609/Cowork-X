@@ -6,8 +6,9 @@ import wikipediaapi
 import re
 import json
 from tavily import TavilyClient
+import os 
 
-client = TavilyClient("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")
+client = TavilyClient(os.getenv(TAVILY_WEB_CLIENT))
 
 # All supported Mermaid diagram types
 MERMAID_DIAGRAM_TYPES = {
