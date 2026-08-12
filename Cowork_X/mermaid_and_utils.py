@@ -421,7 +421,7 @@ def execute_tool_call(tool_call):
             query=func_args.get("query", ""),
             search_depth=func_args.get("search_depth", "basic"),
             include_answer=func_args.get("include_answer", True),
-            max_results=func_args.get("max_results", 3)
+            max_results=func_args.get("max_results", 8)
         )
         return json.dumps(result, ensure_ascii=False)
     else:
