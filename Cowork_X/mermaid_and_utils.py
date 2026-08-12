@@ -11,7 +11,7 @@ import dotenv
 
 dotenv.load_dotenv()
 
-client = TavilyClient(os.getenv(TAVILY_WEB_CLIENT))
+client = TavilyClient(os.getenv("TAVILY_WEB_CLIENT"))
 
 # All supported Mermaid diagram types
 MERMAID_DIAGRAM_TYPES = {
