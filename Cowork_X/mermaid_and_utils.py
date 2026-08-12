@@ -7,6 +7,9 @@ import re
 import json
 from tavily import TavilyClient
 import os 
+import dotenv 
+
+dotenv.load_dotenv()
 
 client = TavilyClient(os.getenv(TAVILY_WEB_CLIENT))
 
